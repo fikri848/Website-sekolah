@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Play Video</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <video id="myVideo" autoplay muted playsinline>
+    <source src="https://files.catbox.moe/0hrtb7.mp4" type="video/mp4">
+    Browser Anda tidak mendukung video.
+  </video>
+
+  <script>
+    const video = document.getElementById("myVideo");
+
+    // Coba unmute setelah video mulai diputar
+    video.play().then(() => {
+      video.muted = false;
+      video.volume = 1.0;
+    }).catch(err => {
+      console.log("Autoplay dengan suara diblokir, user harus klik layar dulu.");
+    });
+
+    // Klik di mana saja untuk unmute jika gagal autoplay
+    document.body.addEventListener("click", () => {
+      video.muted = false;
+      video.play();
+    });
+  </script>
+</body>
+</html>
